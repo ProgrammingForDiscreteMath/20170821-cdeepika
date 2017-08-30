@@ -1,35 +1,123 @@
-# Create a list with the first ten triangular numbers
-# (see https://oeis.org/A000217)
+"""
+This is the code file for Assignment from 23rd August 2017.
+This is due on 30th August 2017.
+"""
+##################################################
+#Complete the functions as specified by docstrings
+# Coded in Python 3
 
-L = [ for i in range(10)]
+# 1
 
-# Create a function to test if a number is prime
-def is_prime(n):
+def entries_less_than_ten(L):
     """
-    Test if ``n`` is a prime.
+    Return those elements of L which are less than ten.
+
+    Args:
+        L: a list
+
+    Returns:
+        A sublist of L consisting of those entries which are less than 10.
     """
+    return [i for i in L if  i< 10]
 
-# Tests
-# is_prime(2033) == False
-# is_prime(2039) == True
+#Test
+#print entries_less_than_ten([2, 13, 4, 66, -5]) == [2, 4, 6, -5]
+# This test has a spelling mistake. Assuming it is 6 and not 66. - Deepika 
 
-# Create a function which returns a list of the first ten prime numbers
-# greater than or equal to n
+# 2
 
-def next_ten_primes(n):
+def number_of_negatives(L):
     """
-    Return the list of the first ten prime numbers greate than or equal to n
+    Return the number of negative numbers in L.
 
-    
+    Args:
+        L: list of integers
+
+    Returns:
+        number of entries of L which are negative
     """
+    #same logic as #1
+    l = [i for i in L if  i< 0]
+    return len(l)
 
+# TEST
+#print number_of_negatives([2, -1, 3, 0, -1, 0, -45, 21]) == 3
 
-# Tests
-# next_ten_primes(2033) == [2039, 2053, 2063, 2069, 2081, 2083, 2087, 2089, 2099, 2111]
-# next_ten_primes(2039) == [2039, 2053, 2063, 2069, 2081, 2083, 2087, 2089, 2099, 2111]
+# 3
+def common_elements(L1, L2):
+    """
+    Return the common elements of lists ``L1`` and ``L2``.
 
+    Args:
+        L1: List
+        L2: List
 
+    Returns:
+        A list whose elements are the common elements of ``L1`` and
+        ``L2`` WITHOUT DUPLICATES.
+    """
+    return list(set([i for i in L1 if i in L2]))
 
+#TEST
+#common_elements([1, 2, 1, 4, "bio", 6, 1], [4, 4, 2, 1, 3, 5]) == [1, 2, 4]
 
+#4
+def fibonacci_generator():
+    """
+    Generate the Fibonacci sequence.
 
+    The Fibonacci sequence 1, 1, 2, 3, 5, 8, 13, 21,...
+    is defined by a1=1, a2=1, and an = a(n-1) + a(n-2).
+    """
+    a1 = 1
+    a2 = 1
+    while True:
+        yield a1
+        a1, a2 = a2, a1 + a2
+#TEST
+#f = fibonacci()
+# Use f.__next__() for printing. It gives individual elements but doesn't fit in the test provided. 
+#Throws AttributeError.
+#[f.next() for f in range(10)] == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 
+#5
+def largest_fibonacci_before(n):
+    """
+    Return the largest Fibonacci number less than ``n``.
+    """
+    #read output of above generator upto ``n`` into a list ``l`` and print the preceding index.
+    #len(l) -1 => index of ``n``
+    return l[len(l)-2] 
+#TEST
+#largest-fibonacci_before(55) == 34
+
+#6
+def catalan_generator():
+    """
+    Generate the sequence of Catalan numbers.
+
+    For the definition of the Catalan number sequence see `OEIS <https://www.oeis.org/A000108>`.
+    """
+    pass #Your code goes here.
+
+#TEST
+#c = catalan_generator()
+#[c.next() for i in range(10)] == [1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862]
+ 
+#7
+### CREATE YOUR OWN FUNCTION. Make sure it has a nice docstring.
+# See https://www.python.org/dev/peps/pep-0257/
+# for basic tips on docstrings.
+def fibonacci(n):
+    """
+    Returns a list of fibonacci series of length ''n''.
+    """
+    l=[]
+    x,y = 0,1
+    for i in range(n):
+        n = x+y
+        l.append(n)
+        x,y = y,y+1
+    return l
+##TEST
+#fibonacci(5) == [1, 3, 5, 7, 9]
